@@ -23,24 +23,27 @@ public class MainActivity extends AppCompatActivity {
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
-        //Define an Array for the adapter
-        ArrayList<UserProfile> mList=new ArrayList<>();
+        //Define an Arraylist of UserPost for the adapter, and initialize the value
+        ArrayList<UserPost> userPosts = new ArrayList<UserPost>();
+        userPosts.add(new UserPost("john", "smith", "this is my first post, woohoo!", "", "", 1000));
+        userPosts.add(new UserPost("mark", "simpson", "this is my second post, woohoo!", "", "", 10434));
+        userPosts.add(new UserPost("Lucas", "williams", "this is my third post, woohoo!", "", "", 134));
+        userPosts.add(new UserPost("mary", "brown", "this is my fourth post, woohoo!", "", "", 1343));
+        userPosts.add(new UserPost("jane", "miller", "this is my fifth post, woohoo!", "", "", 1650));
+        userPosts.add(new UserPost("liz", "taylor", "this is my sixth post, woohoo!", "", "", 58));
+        userPosts.add(new UserPost("Kate", "davis", "this is my seventh post, woohoo!", "", "", 165));
 
 
-        //In real life, this array list will be populated from an API call
-        for(int i=0;i<=10;i++){
-            UserProfile userProfile=new UserProfile("fname"+i,"lname"+i,"Not Available",i+20);
-            mList.add(i,userProfile);
-        }
-
-        if(getIntent()!=null) //Log.d(this.getClass().getSimpleName(),getIntent().getAction());
+//        if(getIntent()!=null) {
+//            Log.d(this.getClass().getSimpleName(),getIntent().getAction());
+//        }
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter
-        mAdapter = new MyRecycleViewAdapter(mList);
+        mAdapter = new MyRecycleViewAdapter(userPosts);
         mRecyclerView.setAdapter(mAdapter);
     }
 }

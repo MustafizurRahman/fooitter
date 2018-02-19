@@ -6,14 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by hongyuchen on 2018-01-31.
  */
 
 public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.ViewHolder> {
-    private List<UserProfile> myList;
+    //Arraylist
+    private ArrayList<UserPost> mMyList;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -28,8 +29,8 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyRecycleViewAdapter(List<UserProfile> mList) {
-        myList = mList;
+    public MyRecycleViewAdapter(ArrayList<UserPost> myList) {
+        mMyList = myList;
     }
 
     // Create new views (invoked by the layout manager)
@@ -49,15 +50,17 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //Log.d("FIRSTNAME",myList.get(position).getFirstName());
-        ((TextView)holder.itemView.findViewById(R.id.fname_text_view)).setText(myList.get(position).getFirstName());
-        ((TextView)holder.itemView.findViewById(R.id.number_of_viewers)).setText(String.valueOf(myList.get(position).getUserAge()));
+        ((TextView)holder.itemView.findViewById(R.id.fname_text_view)).setText(mMyList.get(position).getmFirstName());
+        ((TextView)holder.itemView.findViewById(R.id.lname_text_view)).setText(mMyList.get(position).getmLastName());
+        ((TextView)holder.itemView.findViewById(R.id.post_title_text_view)).setText(mMyList.get(position).getmShortDescription());
+        ((TextView)holder.itemView.findViewById(R.id.number_of_viewers)).setText(mMyList.get(position).getmNumberOfViews() + " Views");
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return myList.size();
+        return mMyList.size();
     }
 
     }
