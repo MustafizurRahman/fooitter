@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.ViewHolder> {
     //Arraylist
     private ArrayList<UserPost> mMyList;
+    private Context mContext;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -29,8 +30,9 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyRecycleViewAdapter(ArrayList<UserPost> myList) {
+    public MyRecycleViewAdapter(ArrayList<UserPost> myList, Context context) {
         mMyList = myList;
+        mContext=context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -54,13 +56,29 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
         ((TextView)holder.itemView.findViewById(R.id.lname_text_view)).setText(mMyList.get(position).getmLastName());
         ((TextView)holder.itemView.findViewById(R.id.post_title_text_view)).setText(mMyList.get(position).getmShortDescription());
         ((TextView)holder.itemView.findViewById(R.id.number_of_viewers)).setText(mMyList.get(position).getmNumberOfViews() + " Views");
-
+    
+    
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mMyList.size();
+    }
+    
+     private Drawable getDrawableImage(String fileName){
+        Drawable drawable = null;
+        try {
+            // get input stream
+            InputStream ims = mContext.getAssets().open(fileName);
+            // load image as Drawable
+            drawable = Drawable.createFromStream(ims, null);
+            // set image to ImageView
+        }
+        catch(IOException ex) {
+            return null;
+        }
+        return drawable;
     }
 
     }
